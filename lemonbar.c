@@ -245,12 +245,8 @@ int xft_char_width (uint32_t ch, font_t *cur_font)
         XftGlyphExtents (dpy, cur_font->xft_ft, &glyph, 1, &gi);
         XftFontUnloadGlyphs (dpy, cur_font->xft_ft, &glyph, 1);
         xft_char[slot] = ch;
-        if (gi.xOff >= gi.width) {
-            xft_width[slot] = gi.xOff;
-        } else {
-            xft_width[slot] = gi.width;
-        }
-        return xft_width[slot];
+        xft_width[slot] = gi.xOff;
+        return gi.xOff;
     } else if (xft_char[slot] == ch)
         return xft_width[slot];
     else
